@@ -12,6 +12,14 @@ group :development do
   gem 'sqlite3'
 end
 
+gem 'faker'
+gem 'devise'
+gem 'bootstrap-sass', '~> 3.1.1'      
+gem 'figaro'
+gem 'stripe'
+gem 'pundit'
+gem 'friendly_id', '~> 5.0.0'
+gem 'redcarpet'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.2'
 

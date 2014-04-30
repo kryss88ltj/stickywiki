@@ -1,0 +1,14 @@
+<h1><%= current_user.name %>'s Wikis</h1>
+
+<% if current_user %>
+<% @wikis.each do |wiki| %>
+    <div class="media">
+      <div class="media-body">
+        <h5 class="media-heading">
+          <%= link_to wiki.title, wiki %>
+        </h5>
+      </div>
+    </div>
+  <% end %>
+<%= link_to "Create Wiki", new_wiki_path, class: 'btn btn-info' %>
+<% end %>
