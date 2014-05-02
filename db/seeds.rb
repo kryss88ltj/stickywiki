@@ -14,4 +14,8 @@ wikis = []
   )
 end
 
+plan = Plan.create!(:name => "Premium", :price => 10)
+plan.save 
+
+p "#{plan} is the plan name"
 p "created 5 wikis"

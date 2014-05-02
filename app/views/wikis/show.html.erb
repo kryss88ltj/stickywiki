@@ -1,7 +1,28 @@
-<h1><%= @wiki.title %></h1>
-<p><%= @wiki.body %></p>
+<h1> <%= @wiki.title %> </h1>
+
+<p> <%= markdown @wiki.body  %> </p>
+
+<p>
+  <%= link_to "Edit", edit_wiki_path(@wiki),  class: :button %>
+  <%= link_to "Delete", @wiki, :data => { :confirm => 'Are you sure?' }, :method => :delete, class: :button%>
+</p>
 
 
-<%= link_to "Edit Wiki", edit_wiki_path, class: 'btn btn-info' %>
+<% if @wiki.collaborations.all.empty? == false && current_user %>
 
-<%= link_to "Delete Wiki", @wiki, method: :delete, class: 'btn btn-danger', confirm: 'Are you sure you want to delete this topic?' %>
+      <h3>Collaborators</h3>
+      <h5>This wiki has following collaborators:</h5>
+      </br>
+      <strong>
+      <ul>
+      <% @wiki.users.each do |x| %>
+      <li><%= x.name %></li>
+      <% end %>
+      </ul>
+    </strong>
+
+<% else %>
+
+<h5>This wiki has no collaborators. Premium users can share private wikis with other users by clicking the <strong>edit</strong> button.</h5>
+
+<% end %>

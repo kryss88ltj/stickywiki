@@ -2,8 +2,6 @@ class CollaborationsController < ApplicationController
   
   def new 
     @collaboration = Collaboration.new
-    #@users = User.all
-    #@wiki = Wiki.find(params[:wiki_id]) 
   end
 
   def create

@@ -1,16 +1,20 @@
-<h1>New Wiki</h1>
+<h1>Create a new Wiki</h1>
+<%= form_for @wiki do |f| %>
+  
 
-<%= form_for [@wiki] do |f| %>
-    <%= f.label :title %>
-    <%= f.text_field :title, class: 'form-control', placeholder: "Enter post title" %>
+  <%= f.label "Topic", style: 'font-size: 20px' %>
+  <%= f.text_field :title %>
 
-
-    <%= f.label :body %>
-    <%= f.text_area :body, rows: 8, class: 'form-control', placeholder: "Enter post body" %>
-
-
-  <div class="form-group">
-    <%= f.submit "Save", class: 'btn btn-success' %>
-  </div>
+  <%= f.label "Content", style: 'font-size: 20px'%>
+  <%= f.text_area(:body, rows: 15) %> </br>
+  
+  <% if !!current_user and current_user.subscribed? %>
+  <p style='font-size: 20px'>
+  <%= f.check_box  :private, style: 'font-size: 20px' %>Check to make your Wiki private </p>
 
   <% end %>
+
+</br>
+  <%= f.submit "Save", class: "button "%>
+
+<% end %>

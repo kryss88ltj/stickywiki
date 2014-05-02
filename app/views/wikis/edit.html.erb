@@ -1,16 +1,29 @@
 <h1>Edit Wiki</h1>
 
-<%= form_for [@wiki] do |f| %>
-    <%= f.label :title %>
-    <%= f.text_field :title, class: 'form-control', placeholder: "Enter post title" %>
-
-
-    <%= f.label :body %>
-    <%= f.text_area :body, rows: 8, class: 'form-control', placeholder: "Enter post body" %>
-
-
-  <div class="form-group">
-    <%= f.submit "Update", class: 'btn btn-success' %>
-  </div>
-
+  <%= form_for(@wiki) do |form| %>
+      
+      <%= form.label "Topic" %>
+      <%= form.text_field :title %>
+      <%= form.label "Content" %>
+      <%= form.text_area :body, rows: 8 %> </br>
+      
+      <% if current_user && current_user.subscribed != false %>      
+        
+        <strong>Delete Collaborators</strong>
+        <ul>
+        <% @wiki.collaborations.each do |collaboration| %>
+        <li><%= collaboration.user.name %> <%= link_to "Delete", collaboration_path(collaboration), method: :delete %></li>
+        
+        <% end %>
+        </ul>
+       <strong>Add Collaborators</strong>
+        <%= form.fields_for :collaborations_attributes do |user| %>
+          <%= user.fields_for(:collaboration) do |collaboration| %>
+            <%= collaboration.collection_select :user_id, @users, :id, :name, prompt: true %>
+          <% end %>   
+        <% end %>
+      <% end %>
+      
+    <%= form.submit "Save" %> 
   <% end %>
+

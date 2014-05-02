@@ -1,0 +1,17 @@
+<h1>Upgrade to Premium</h1>
+</br>
+
+<% @plans.each do |plan| %>
+<div>
+  <%= current_user.name.split(" ").first unless current_user.name == nil %>
+  <p>
+    Currently we have a <strong><%= plan.name %></strong> plan available for you!</br>
+    It will allow you to create private wikis and share them with other users of Blocipedia.</br>
+    Users can be added as collaborators to your private wikis.
+  </p>    
+  <p>The premium plan will cost you only <strong><%= plan.price %>$</strong>.</p>
+  
+  <%= link_to "Subscribe", new_subscription_path(:plan_id => plan.id), class: "button" %> 
+ </div> 
+
+<% end %>

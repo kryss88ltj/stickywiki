@@ -11,7 +11,43 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140430184003) do
+ActiveRecord::Schema.define(version: 20140501014632) do
+
+  create_table "collaborations", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+    t.integer  "wiki_id"
+  end
+
+  create_table "friendly_id_slugs", force: true do |t|
+    t.string   "slug",                      null: false
+    t.integer  "sluggable_id",              null: false
+    t.string   "sluggable_type", limit: 50
+    t.string   "scope"
+    t.datetime "created_at"
+  end
+
+  add_index "friendly_id_slugs", ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
+  add_index "friendly_id_slugs", ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
+  add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id"
+  add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type"
+
+  create_table "plans", force: true do |t|
+    t.string   "name"
+    t.integer  "price"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "subscriptions", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "email"
+    t.integer  "plan_id"
+    t.integer  "user_id"
+    t.string   "stripe_customer_token"
+  end
 
   create_table "users", force: true do |t|
     t.string   "name"
@@ -33,6 +69,8 @@ ActiveRecord::Schema.define(version: 20140430184003) do
     t.datetime "updated_at"
     t.string   "stripe_card_token"
     t.string   "role"
+    t.boolean  "subscribed"
+    t.boolean  "subscription_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
@@ -44,7 +82,8 @@ ActiveRecord::Schema.define(version: 20140430184003) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "public"
+    t.boolean  "private"
+    t.string   "slug"
   end
 
   add_index "wikis", ["user_id"], name: "index_wikis_on_user_id"

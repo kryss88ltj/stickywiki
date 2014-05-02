@@ -15,20 +15,24 @@
     <div class="navbar navbar-default" role="navigation">
         <div class="container-fluid">
           <div class="navbar-header">
-            <%= link_to "stickywiki", welcome_index_path, class: "navbar-brand" %> 
+            <%= link_to "stickywiki", root_path, class: "navbar-brand" %> 
           </div>
          
           <ul class="nav navbar-nav">
             <li class="active"><a href="#">Link</a></li>
             <li><a href="#">Link</a></li>
             <li><a href="#">Link</a></li>
+            
+              <li>
+                <%= link_to "Subscribe", plans_path  %>
+              </li>   
+            
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <% if current_user %>
+            <% if current_user == nil %>
               <li><%= link_to "Sign In", new_user_session_path %></li>
-              Hello <%= current_user.name %>!   <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
             <% else %>
-              <%= link_to "Sign In", new_user_session_path %>
+              <li>Hello <%= current_user.name %>!   <%= link_to "Sign out", destroy_user_session_path, method: :delete %></li>
             <% end %>
           </ul>
      

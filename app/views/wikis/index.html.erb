@@ -1,14 +1,22 @@
-<h1><%= current_user.name %>'s Wikis</h1>
+<div class='eight columns'>
+ 
+  <h1>Public wikis</h1> 
+    <%= link_to 'Create a Wiki', new_wiki_path, class:"button ", method: :get %>    
+      <% @wikis.each do |wiki| %>
+        <p><%= link_to wiki.title, wiki %>
+          <small>created: <%= wiki.created_at.strftime("%d %b. %Y") %> </small></p></p>
+        <% end %>
+        
+</div>
 
-<% if current_user %>
-<% @wikis.each do |wiki| %>
-    <div class="media">
-      <div class="media-body">
-        <h5 class="media-heading">
-          <%= link_to wiki.title, wiki %>
-        </h5>
-      </div>
-    </div>
-  <% end %>
-<%= link_to "Create Wiki", new_wiki_path, class: 'btn btn-info' %>
-<% end %>
+   <% if current_user && current_user.subscribed != false %>
+   <h1>Private wikis</h1> 
+      <% if @pwikis.empty? %>
+         <p>You have not created private wikis so far.</p>
+      <% else %>
+      <% @pwikis.each do |pwiki| %>
+      <p><small>private  </small> <%= link_to (pwiki.title), wiki_path(pwiki) %>
+        <small>created: <%= pwiki.created_at.strftime("%d %b. %Y") %> </small></p>
+            <%end %>
+    <% end %>
+    <% end %>

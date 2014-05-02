@@ -1,0 +1,26 @@
+<h2>Add collaborators to the <strong>"<%= @wiki.title %></strong>" wiki </h2>
+
+<table>
+<tr> 
+  <th>Name</th>
+  <th>Email</th>
+  <th>Give Access</th>
+</tr>
+
+<tr> 
+<%= form_for (@collaboration) do |f| %>
+<% @users.each do |user| %>
+    <td><%= user.name %></td>
+    <td><%= user.email %></td>
+    <td> <%= f.collection_select :user_id, User.all, :id, :name, prompt: true %> </td>
+</tr>
+<%= f.submit %>
+   <% end %>
+   </table>
+   <%= f.submit %>
+<% end %>
+
+
+
+</br>
+<%=link_to "back", :back %>

@@ -3,6 +3,7 @@ class SubscriptionsController < ApplicationController
   def new
      @plan = Plan.find(params[:plan_id]) 
      @subscription = @plan.subscriptions.build
+     # @subscription = Subscription.new(plan_id: params[:plan_id])
   end
 
 
