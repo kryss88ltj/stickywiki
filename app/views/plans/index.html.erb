@@ -3,15 +3,15 @@
 
 <% @plans.each do |plan| %>
 <div>
-  <%= current_user.name.split(" ").first unless current_user.name == nil %>
+  <%= current_user.name.split(" ").first unless current_user.name == nil %>,
   <p>
-    Currently we have a <strong><%= plan.name %></strong> plan available for you!</br>
-    It will allow you to create private wikis and share them with other users of Blocipedia.</br>
+    There is a <strong><%= plan.name %></strong> plan available for you!</br>
+    It allows you to create private wikis and share them with other users of Blocipedia.</br>
     Users can be added as collaborators to your private wikis.
   </p>    
-  <p>The premium plan will cost you only <strong><%= plan.price %>$</strong>.</p>
+  <p>The premium plan is only <strong><%= plan.price %>$</strong> per month.</p>
   
-  <%= link_to "Subscribe", new_subscription_path(:plan_id => plan.id), class: "button" %> 
+  <%= link_to "Subscribe", new_subscription_path(:plan_id => plan.id), class: "btn btn-info" %> 
  </div> 
 
 <% end %>

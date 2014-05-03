@@ -19,20 +19,22 @@
           </div>
          
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Link</a></li>
-            <li><a href="#">Link</a></li>
-            <li><a href="#">Link</a></li>
+            <li><%= link_to "Public Wikis", wikis_path %></li>
             
+            <% if current_user && current_user.subscribed? == false  %>
               <li>
                 <%= link_to "Subscribe", plans_path  %>
               </li>   
-            
+            <% end %> 
+
           </ul>
-          <ul class="nav navbar-nav navbar-right">
+          <ul class="nav navbar-nav right">
             <% if current_user == nil %>
               <li><%= link_to "Sign In", new_user_session_path %></li>
             <% else %>
-              <li>Hello <%= current_user.name %>!   <%= link_to "Sign out", destroy_user_session_path, method: :delete %></li>
+              <li>
+                <%= link_to "Sign out", destroy_user_session_path, class: 'link', method: :delete %>
+              </li>
             <% end %>
           </ul>
      

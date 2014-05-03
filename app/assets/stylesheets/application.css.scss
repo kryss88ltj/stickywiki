@@ -4,6 +4,10 @@ body {
   padding: 50px;
 }
 
+.container-fluid {
+    background: #E7E7FF;
+}
+
 .header,
 .marketing {
   padding-right: 15px;
@@ -21,8 +25,19 @@ body {
 
 .navbar-right {
   width: auto;
+  display: inline;
 }
 
-.navbar-right > li {
-  width: 100%;
+
+
+.right {
+  float:right;
+}
+
+.link {
+  float: left;
+}
+
+.four-columns {
+  padding-left: 10%;
 }
